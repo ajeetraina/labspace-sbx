@@ -1,4 +1,4 @@
-# Introduction
+# Introduction to Docker Networking
 
 👋 Welcome to the **Labspace starter** lab! During this lab, you will learn to do the following:
 
