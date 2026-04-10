@@ -1,0 +1,25 @@
+metadata:
+  id: ${REPO_OWNER}/${REPO_NAME}
+  sourceRepo: github.com/${REPO_OWNER}/${REPO_NAME}
+  contentVersion: abcd123 # Will be filled in during CI
+
+title: Labspace starter
+description: |
+  A basic template for creating a Labspace, including all of the boilerplate needed to write and publish a Labspace.
+
+sections:
+  - title: Introduction
+    contentPath: 01-introduction.md
+  - title: Main Content 1
+    contentPath: 02-main-content.md
+  - title: Conclusion
+    contentPath: 03-conclusion.md
+
+# Services are used to add default tabs in the Labspace interface.
+# The IDE will always be present as a service, but you can add additional services as needed.
+# Icon values come from https://fonts.google.com/icons/
+services:
+  - id: app
+    url: http://localhost:3000
+    title: App
+    icon: anchor
