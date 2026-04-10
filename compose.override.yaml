@@ -1,7 +1,7 @@
 services:
   configurator:
     environment:
-      PROJECT_CLONE_URL: https://github.com/${REPO_OWNER}/${REPO_NAME}
+      PROJECT_CLONE_URL: https://github.com/ajeetraina/labspace-sbx
 
   # workspace:
   #   # Override the default image if desired

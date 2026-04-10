@@ -1,6 +1,6 @@
 metadata:
-  id: ${REPO_OWNER}/${REPO_NAME}
-  sourceRepo: github.com/${REPO_OWNER}/${REPO_NAME}
+  id: ajeetraina/labspace-sbx
+  sourceRepo: github.com/ajeetraina/labspace-sbx
   contentVersion: abcd123 # Will be filled in during CI
 
 title: Labspace starter
