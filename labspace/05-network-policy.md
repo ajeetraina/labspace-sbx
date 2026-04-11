@@ -44,14 +44,28 @@ Leave this running. Now go to your sandbox session and ask Codex to do something
 Run pip install requests and tell me the version installed.
 ```
 
-Watch the policy log. You'll see:
+Real output from `sbx policy log sbxlab`:
 
 ```
-ALLOWED   files.pythonhosted.org   200
-ALLOWED   pypi.org                 200
+Blocked requests:
+SANDBOX   TYPE      HOST                  PROXY     RULE                                                     LAST SEEN         COUNT
+sbxlab    network   169.254.169.254:80    forward   no applicable policies for op(action=net:connect:tcp...)  14:55:43 11-Apr   1
+
+Allowed requests:
+SANDBOX   TYPE      HOST                           PROXY            RULE            LAST SEEN         COUNT
+sbxlab    network   files.pythonhosted.org:443     forward-bypass   domain-allowed  00:53:23 12-Apr   1
+sbxlab    network   pypi.org:443                   forward-bypass   domain-allowed  00:53:23 12-Apr   1
+sbxlab    network   api.openai.com:443             forward          domain-allowed  00:49:41 12-Apr   4
+sbxlab    network   github.com:443                 forward-bypass   domain-allowed  00:49:41 12-Apr   12
+sbxlab    network   ports.ubuntu.com:80            forward          domain-allowed  23:58:59 11-Apr   13
+sbxlab    network   registry.npmjs.org:443         forward-bypass   domain-allowed  14:22:53 11-Apr   3
 ```
 
-Every connection — allowed or blocked — is logged with a timestamp.
+Key observations:
+- `169.254.169.254` (AWS IMDS) is in the **Blocked** section — dangerous cloud endpoint, blocked by default
+- `api.openai.com` uses `forward` proxy — this is where credentials are injected
+- `pypi.org` and `files.pythonhosted.org` allowed — pip install worked
+- Every connection logged with sandbox name, host, proxy type, rule, timestamp, and hit count
 
 ---
 
@@ -122,6 +136,7 @@ The policy log isn't just a debugging tool. It's an audit trail:
 - **What** the agent tried to reach
 - **Whether** it was allowed or blocked
 - **When** each connection happened
+- **How** it was proxied (`forward` = credential injection active, `forward-bypass` = no injection needed, `transparent` = passthrough)
 
 For regulated enterprises — banks, healthcare companies, government — this log answers the question: *"What did the agent do on the network?"*
 
