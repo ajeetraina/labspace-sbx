@@ -145,13 +145,20 @@ sbx policy allow network "*.npmjs.org,*.pypi.org,files.pythonhosted.org"
 
 ## Reach host services from inside the sandbox
 
-If you have a local service running on your Mac (like Ollama), you can't use `localhost` from inside the VM — that resolves to the VM itself. Use `host.docker.internal` instead:
+If you have a local service running on your Mac — like Docker Model Runner — you can't use `localhost` from inside the VM, because `localhost` resolves to the VM itself, not your host. Use `host.docker.internal` instead:
 
 ```bash
-sbx policy allow network localhost:11434
+# Allow the sandbox to reach Docker Model Runner on your host
+sbx policy allow network host.docker.internal:12434
 ```
 
-Then inside the sandbox, point your client at `host.docker.internal:11434`.
+Then inside the sandbox, point your client at `host.docker.internal:12434`:
+
+```bash
+curl http://host.docker.internal:12434/engines/llama.cpp/v1/models
+```
+
+> **Why Docker Model Runner instead of Ollama?** Docker Model Runner is Docker's native local model inference engine — built into Docker Desktop. It runs models locally using the same `docker model` CLI you already use, with no separate install required. Use Ollama only if you're not on Docker Desktop.
 
 ---
 
