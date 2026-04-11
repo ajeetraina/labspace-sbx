@@ -136,7 +136,7 @@ cd ~/sbx-lab
 
 ```bash
 cd ~/sbx-lab
-sbx create --name=sbxlab openai .
+sbx create --name=sbxlab codex .
 ```
 
 > **First run:** The Claude Code image will pull (1–2 minutes) and the sandbox will be created with the Balanced network policy you selected at login.
