@@ -152,6 +152,13 @@ SANDBOX   AGENT   STATUS    PORTS   WORKSPACE
 sbxlab    codex   stopped           /your/project/path
 ```
 
+Once you run it (Step 6), the status changes to `running`:
+
+```
+SANDBOX   AGENT   STATUS    PORTS   WORKSPACE
+sbxlab    codex   running           /your/project/path
+```
+
 ## Step 6 — Run your sandbox
 
 ```bash
