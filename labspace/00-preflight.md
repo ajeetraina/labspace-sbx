@@ -53,6 +53,7 @@ Your one-time device confirmation code: XXXX-XXXX
 Open this URL to sign in: https://login.docker.com/activate?user_code=XXXX-XXXX
 
 By logging in, you agree to our Subscription Service Agreement.
+For more details, see https://www.docker.com/legal/docker-subscription-service-agreement/
 
 Waiting for authentication...
 Signed in as <your-docker-username>.
@@ -68,15 +69,30 @@ Open the URL in your browser — the CLI confirms sign-in automatically.
 Select a default network policy for your sandboxes:
 
      1. Open         — All network traffic allowed, no restrictions.
-     2. Balanced     — Default deny, with common dev sites allowed.
+  ❯  2. Balanced     — Default deny, with common dev sites allowed.
      3. Locked Down  — All network traffic blocked unless you allow it.
 
   Use ↑/↓ or 1–3 to navigate, Enter to confirm, Esc to cancel.
+
+Network policy set to "Balanced". Default deny, with common dev sites allowed.
+
+  To change this anytime, run:
+    sbx policy reset
+
+  To configure additional policies, run:
+    sbx policy allow network <host>
+    sbx policy deny network <host>
 ```
 
-Select **2. Balanced** for this lab.
+| Policy | When to use |
+|--------|-------------|
+| Open | Local dev, no external exposure concerns |
+| **Balanced** | **Recommended — least privilege without breaking typical dev workflows** |
+| Locked Down | High-security or air-gapped environments |
 
-> **Note:** This policy is set once at login and applies to all sandboxes on this machine.
+> **Note:** This policy applies to all sandboxes on this machine. Change it anytime with `sbx policy reset`.
+
+> **Note for Docker employees:** Use your personal Docker account (not your `@docker.com` SSO account). Corporate SSO is not yet supported by sbx.
 
 ## Step 3 — Verify you're logged in
 
