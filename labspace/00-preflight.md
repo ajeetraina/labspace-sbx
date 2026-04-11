@@ -139,13 +139,46 @@ cd ~/sbx-lab
 sbx create --name=sbxlab codex .
 ```
 
-> **First run:** The Claude Code image will pull (1–2 minutes) and the sandbox will be created with the Balanced network policy you selected at login.
+> **First run:** The agent image will pull (1–2 minutes) and the sandbox will be created with the Balanced network policy you selected at login.
 
 ```bash
 sbx ls
 ```
 
-You should see `sbxlab` in the list with status `stopped`. The sandbox is ready — you'll start it in the next module.
+You should see `sbxlab` in the list with status `stopped`:
+
+```
+SANDBOX   AGENT   STATUS    PORTS   WORKSPACE
+sbxlab    codex   stopped           /your/project/path
+```
+
+## Step 6 — Run your sandbox
+
+```bash
+sbx run sbxlab
+```
+
+You will see a trust prompt before the agent starts:
+
+```
+INFO: Starting Docker daemon
+Starting codex agent in sandbox 'sbxlab'...
+Workspace: /your/project/path
+
+> You are in /your/project/path
+
+  Do you trust the contents of this directory? Working with untrusted
+  contents comes with higher risk of prompt injection.
+
+› 1. Yes, continue
+  2. No, quit
+
+  Press enter to continue
+```
+
+Select **1. Yes, continue** to launch the agent.
+
+> **Why this prompt exists:** sbx mounts only your project directory into the microVM. The trust check ensures you're aware of what the agent can see and act on.
 
 ---
 
