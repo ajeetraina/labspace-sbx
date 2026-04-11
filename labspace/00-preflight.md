@@ -95,7 +95,7 @@ Network policy set to "Balanced". Default deny, with common dev sites allowed.
 
 ---
 
-## Step 3 — Authenticate Claude
+## Step 3 — Authenticate your agent
 
 Set your Anthropic API key as a global secret:
 
