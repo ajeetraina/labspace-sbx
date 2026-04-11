@@ -97,15 +97,25 @@ Network policy set to "Balanced". Default deny, with common dev sites allowed.
 
 ## Step 3 — Authenticate Claude
 
-```bash
-sbx secret ls
-```
-
-You should see an entry for `anthropic` in the output. If not:
+Set your Anthropic API key as a global secret:
 
 ```bash
 echo "$ANTHROPIC_API_KEY" | sbx secret set -g anthropic
 ```
+
+Verify it was stored:
+
+```bash
+sbx secret ls
+```
+
+Expected output:
+
+```
+anthropic
+```
+
+> **Note:** If you see `No secrets found`, the key was not set. Re-run the `sbx secret set` command above.
 
 > **Why this matters:** Secrets are stored in your OS keychain and injected at the network proxy layer. The agent never sees the raw API key. This is one of the core governance guarantees you'll explore in Module 4.
 
