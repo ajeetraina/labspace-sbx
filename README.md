@@ -23,7 +23,7 @@
 **Pre-requisites:**
 - `sbx` installed: `brew install docker/tap/sbx`
 - `sbx login` complete (Docker OAuth)
-- OpenAI API key stored: `echo "$OPENAI_API_KEY" | sbx secret set -g openai`
+- OpenAI API key 
 
 ## Launch the Labspace
 
