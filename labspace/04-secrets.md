@@ -48,11 +48,11 @@ export OPENAI_API_KEY=sk-...your-key-here...
 echo "$OPENAI_API_KEY" | sbx secret set -g openai
 ```
 
-> **If prompted "Secret already exists. Overwrite?"** — delete first, then re-set:
+> **If prompted "Secret already exists. Overwrite?"** — use the interactive prompt instead of piping:
 >
 > ```bash
-> sbx secret delete -g openai
-> echo "$OPENAI_API_KEY" | sbx secret set -g openai
+> sbx secret set -g openai
+> # Paste your key when prompted, then type y to overwrite
 > ```
 
 > **Important:** Global secrets must be set BEFORE `sbx create`. If you set a secret after the sandbox exists, destroy and recreate it:
