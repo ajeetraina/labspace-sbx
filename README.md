@@ -23,7 +23,7 @@
 **Pre-requisites:**
 - `sbx` installed: `brew install docker/tap/sbx`
 - `sbx login` complete (Docker OAuth)
-- Anthropic API key stored: `echo "$ANTHROPIC_API_KEY" | sbx secret set -g anthropic`
+- OpenAI API key stored: `echo "$OPENAI_API_KEY" | sbx secret set -g openai`
 
 ## Launch the Labspace
 
