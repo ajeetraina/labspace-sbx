@@ -1,25 +1,31 @@
 metadata:
   id: ajeetraina/labspace-sbx
   sourceRepo: github.com/ajeetraina/labspace-sbx
-  contentVersion: abcd123 # Will be filled in during CI
+  contentVersion: abcd123
 
-title: Labspace starter
+title: Running AI Agents Safely with Docker Sandboxes
 description: |
-  A basic template for creating a Labspace, including all of the boilerplate needed to write and publish a Labspace.
+  Learn how to run AI coding agents in isolated microVM sandboxes using Docker sbx.
+  Go hands-on with structural isolation, credential proxy injection, network policy
+  enforcement, branch mode, and parallel agent execution. Prove the security
+  guarantees yourself with real commands against real file paths.
 
 sections:
-  - title: Introduction
-    contentPath: 01-introduction.md
-  - title: Main Content 1
-    contentPath: 02-main-content.md
-  - title: Conclusion
-    contentPath: 03-conclusion.md
-
-# Services are used to add default tabs in the Labspace interface.
-# The IDE will always be present as a service, but you can add additional services as needed.
-# Icon values come from https://fonts.google.com/icons/
-services:
-  - id: app
-    url: http://localhost:3000
-    title: App
-    icon: anchor
+  - title: Pre-flight Checklist
+    contentPath: 00-preflight.md
+  - title: Why Agents Need Governance
+    contentPath: 01-why-governance.md
+  - title: Your First Sandbox
+    contentPath: 02-first-sandbox.md
+  - title: "The Isolation Proof \U0001F525"
+    contentPath: 03-isolation-proof.md
+  - title: Secrets Without Exposure
+    contentPath: 04-secrets.md
+  - title: Network Policy
+    contentPath: 05-network-policy.md
+  - title: Branch Mode
+    contentPath: 06-branch-mode.md
+  - title: Parallel Agents
+    contentPath: 07-parallel-agents.md
+  - title: AI Governance at Scale
+    contentPath: 08-governance-summary.md

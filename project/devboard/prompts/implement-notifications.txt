@@ -1,0 +1,20 @@
+Implement status change notifications in the FastAPI backend.
+
+The function send_status_change_notification() in backend/app/main.py is currently a no-op stub. It should send an email notification when an issue's status changes.
+
+Requirements:
+- Implement send_status_change_notification() to send an email using Python's smtplib
+- Use environment variables for SMTP config: SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, NOTIFY_FROM
+- If SMTP_HOST is not set, log a warning and return gracefully (don't crash)
+- The notification should include: issue title, old status, new status, and a link to the issue
+- Add a test that mocks smtplib and verifies the notification is called on status change
+- All existing tests must still pass
+
+Steps:
+1. Read the existing code in backend/app/ to understand where status changes happen
+2. Implement the notification function
+3. Write a test using unittest.mock to mock smtplib.SMTP
+4. Run the full test suite to confirm nothing is broken
+5. Commit with a descriptive message
+
+Do not change the API contract. Only add the notification side effect.

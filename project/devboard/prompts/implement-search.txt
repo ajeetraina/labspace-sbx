@@ -1,0 +1,19 @@
+Implement the issue search feature in the FastAPI backend.
+
+The frontend sends GET /issues/search?q=<query> but the backend currently returns HTTP 501 Not Implemented.
+
+Requirements:
+- Add a search endpoint that accepts a query string parameter `q`
+- Search should match against issue title and description (case-insensitive)
+- Return results in the same format as the list endpoint
+- Add at least two tests: one for a query that returns results, one for a query that returns empty
+- All existing tests must still pass after your changes
+
+Steps:
+1. Read the existing code in backend/app/ to understand the data model and patterns
+2. Implement the search endpoint following existing conventions
+3. Write tests in backend/tests/
+4. Run the full test suite to confirm nothing is broken
+5. Commit with a descriptive message
+
+Do not modify the frontend. Focus only on the backend.
