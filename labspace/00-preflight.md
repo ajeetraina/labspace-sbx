@@ -100,7 +100,7 @@ Network policy set to "Balanced". Default deny, with common dev sites allowed.
 Set your Anthropic API key as a global secret:
 
 ```bash
-echo "$ANTHROPIC_API_KEY" | sbx secret set -g anthropic
+echo "$OPENAI_API_KEY" | sbx secret set -g openai
 ```
 
 Verify it was stored:
@@ -112,7 +112,7 @@ sbx secret ls
 Expected output:
 
 ```
-anthropic
+openai
 ```
 
 > **Note:** If you see `No secrets found`, the key was not set. Re-run the `sbx secret set` command above.
