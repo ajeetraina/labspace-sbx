@@ -1,6 +1,6 @@
 # Your First Sandbox
 
-Time to get hands-on. In this module you'll start your sandbox, explore the architecture from inside and outside the VM, and get Claude authenticated.
+Time to get hands-on. In this module you'll start your sandbox, explore the architecture from inside and outside the VM, and get Codex running.
 
 ---
 
@@ -12,30 +12,36 @@ From your host terminal, in `~/sbx-lab`:
 sbx run sbxlab
 ```
 
-The first run pulls the Claude Code image — this takes 1–2 minutes. Subsequent starts reuse the cached image and take seconds.
-
-You'll see the Claude Code interface load inside your terminal.
-
----
-
-## Authenticate Claude
-
-Inside the Claude session, run:
+On first run, Codex may auto-update itself:
 
 ```
-/login
+Starting codex agent in sandbox 'sbxlab'...
+Workspace: /your/project/path
+
+Updating Codex via `npm install -g @openai/codex`...
+
+changed 2 packages in 4s
+
+🎉 Update ran successfully! Please restart Codex.
 ```
 
-- If you have a **Claude Max / Pro subscription**: login with your email (e.g. `yourname@gmail.com`)
-- If you have an **API key**: it was already injected via the proxy — no `/login` needed
+If you see this, re-run `sbx run sbxlab`. You will then see the trust prompt:
 
-You only need to do this once — credentials persist in the sandbox.
+```
+  Do you trust the contents of this directory? Working with untrusted
+  contents comes with higher risk of prompt injection.
+
+› 1. Yes, continue
+  2. No, quit
+```
+
+Select **1. Yes, continue**. You may also see a model upgrade prompt for GPT-5.4 — select **1. Try new model** to use the latest model.
 
 ---
 
 ## Explore the codebase
 
-Once authenticated, give Claude this prompt:
+Once Codex is running, give it this prompt:
 
 ```
 Explore this codebase and give me:
@@ -45,13 +51,13 @@ Explore this codebase and give me:
 4. Any obvious issues or areas of concern
 ```
 
-Claude will read the source files and report back. Watch it work — it's reading the actual files from your `~/sbx-lab` directory.
+Codex will read the source files and report back. Watch it work — it's reading the actual files from your `~/sbx-lab` directory.
 
 ---
 
 ## What's happening under the hood
 
-While Claude is working, open a **second terminal on your host** and run:
+While Codex is working, open a **second terminal on your host** and run:
 
 ```bash
 # These show the sandbox is a VM, not a container
@@ -59,7 +65,14 @@ docker ps          # sbxlab does NOT appear here
 sbx ls             # sbxlab appears HERE instead
 ```
 
-This is the first hint of the architecture. The sandbox isn't a container on your host — it's a VM. That distinction matters, and you'll prove it hands-on in the next module.
+Expected output from `sbx ls`:
+
+```
+SANDBOX   AGENT   STATUS    PORTS   WORKSPACE
+sbxlab    codex   running           /your/project/path
+```
+
+The sandbox isn't a container on your host — it's a VM. That distinction matters, and you'll prove it hands-on in the next module.
 
 ---
 
@@ -68,10 +81,10 @@ This is the first hint of the architecture. The sandbox isn't a container on you
 Your `~/sbx-lab` directory is mounted into the VM at the same absolute path. This means:
 
 - **Changes you make on the host** appear instantly inside the sandbox
-- **Changes Claude makes inside the sandbox** appear instantly on your host
+- **Changes Codex makes inside the sandbox** appear instantly on your host
 - **Nothing else from your host** is accessible inside the VM
 
-Open one of the source files in your editor on the host. Make a small change and save it. Then ask Claude inside the sandbox to read that file. It sees your change immediately — no sync delay, no copy step.
+Open one of the source files in your editor on the host. Make a small change and save it. Then ask Codex inside the sandbox to read that file. It sees your change immediately — no sync delay, no copy step.
 
 ---
 
@@ -79,8 +92,7 @@ Open one of the source files in your editor on the host. Make a small change and
 
 | Action | Command |
 |---|---|
-| Exit the Claude session | Press `Ctrl-C` twice |
-| Run a shell command without leaving Claude | Type `!` before the command: `!ls` |
+| Exit the Codex session | Press `Ctrl-C` twice |
 | Open the interactive dashboard | Run `sbx` with no arguments (new terminal) |
 
 ---
@@ -102,9 +114,9 @@ Press `Ctrl-C` then `Y` to exit without stopping your sandboxes.
 ## ✅ Checkpoint
 
 Before moving on, confirm:
-- `sbx run sbxlab` worked and Claude responded
+- `sbx run sbxlab` worked and Codex responded
 - `docker ps` on the host shows no sandbox
-- `sbx ls` on the host shows `sbxlab`
-- Claude can read the codebase files
+- `sbx ls` on the host shows `sbxlab` with status `running`
+- Codex can read the codebase files
 
 Next: the isolation proof — where you'll systematically try to break out of the VM.
