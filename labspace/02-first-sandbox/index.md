@@ -9,6 +9,7 @@ Time to get hands-on. In this module you'll start your sandbox, explore the arch
 From your host terminal, in `~/sbx-lab`:
 
 ```bash
+sbx create --name=sbxlab claude . 
 sbx run sbxlab
 ```
 

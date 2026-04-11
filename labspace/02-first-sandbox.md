@@ -26,7 +26,10 @@ Inside the Claude session, run:
 /login
 ```
 
-Choose your preferred login option and complete the OAuth flow. You only need to do this once — the credentials persist in the sandbox.
+- If you have a **Claude Max / Pro subscription**: login with your email (e.g. `yourname@gmail.com`)
+- If you have an **API key**: it was already injected via the proxy — no `/login` needed
+
+You only need to do this once — credentials persist in the sandbox.
 
 ---
 

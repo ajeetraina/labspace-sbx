@@ -20,7 +20,7 @@ Before starting the lab, confirm your environment is ready. Every exercise depen
 Open a terminal on your host machine and run:
 
 ```bash
-sbx --version
+sbx version
 ```
 
 Expected output: a version string like `sbx 0.21.0` or similar.
@@ -56,7 +56,7 @@ This opens a browser for Docker OAuth. Complete the flow and return here.
 
 ---
 
-## Step 3 — Verify your Anthropic secret is stored
+## Step 3 — Authenticate Claude
 
 ```bash
 sbx secret ls
@@ -86,7 +86,13 @@ cd ~/sbx-lab
 ## Step 5 — Create your sandbox
 
 ```bash
+cd ~/sbx-lab
 sbx create --name=sbxlab claude .
+```
+
+> **First run:** The daemon will start and prompt you to select a network policy — choose **2. Balanced**. The Claude Code image will then pull (1–2 minutes).
+
+```bash
 sbx ls
 ```
 
@@ -97,5 +103,9 @@ You should see `sbxlab` in the list with status `stopped`. The sandbox is ready 
 ## ✅ Ready to go
 
 All five checks pass? Move to Module 1.
+
+> **Note for Docker employees:** Use your personal Docker account (not your `@docker.com` SSO account) when `sbx login` opens the browser. Corporate SSO is not yet supported by sbx.
+
+
 
 If anything failed, check [Troubleshooting](https://docs.docker.com/ai/sandboxes/troubleshooting/) or the Appendix at the end of this lab.

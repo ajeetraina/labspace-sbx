@@ -6,11 +6,13 @@ You've proven the agent can't reach your host credentials. Now let's look at how
 
 ## How it works
 
-When you stored your Anthropic API key in the Pre-flight:
+If you stored an Anthropic API key in the Pre-flight:
 
 ```bash
-echo "$ANTHROPIC_API_KEY" | sbx secret set -g anthropic
+sbx secret set -g anthropic
 ```
+
+If you're using a **Claude Max / Pro subscription**, you authenticated via `/login` instead. In that case, credentials are handled by Claude's OAuth session — not the sbx proxy. The proxy injection model described in this module applies to API key users.
 
 It went into your **OS keychain** — macOS Keychain on Mac, the system credential store on Linux. It was never written to disk as plain text. It was never put inside the VM.
 
