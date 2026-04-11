@@ -158,7 +158,26 @@ sbxlab    codex   stopped           /your/project/path
 sbx run sbxlab
 ```
 
-You will see a trust prompt before the agent starts:
+On first run, codex may auto-update itself:
+
+```
+Starting codex agent in sandbox 'sbxlab'...
+Workspace: /your/project/path
+
+Updating Codex via `npm install -g @openai/codex`...
+
+changed 2 packages in 4s
+
+🎉 Update ran successfully! Please restart Codex.
+```
+
+If you see this, simply re-run the command:
+
+```bash
+sbx run sbxlab
+```
+
+You will then see a trust prompt before the agent starts:
 
 ```
 INFO: Starting Docker daemon
