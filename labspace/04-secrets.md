@@ -145,13 +145,13 @@ Three things to notice:
 
 sbx supports proxy injection for:
 
-| Service | Environment variable(s) injected |
-|---|---|
-| `openai` | `OPENAI_API_KEY` |
-| `anthropic` | `ANTHROPIC_API_KEY` |
-| `github` | `GH_TOKEN`, `GITHUB_TOKEN` |
-| `google` | `GEMINI_API_KEY`, `GOOGLE_API_KEY` |
-| `aws` | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` |
+| Service | Environment variable injected |
+|---------|-------------------------------|
+| openai | `OPENAI_API_KEY` |
+| anthropic | `ANTHROPIC_API_KEY` |
+| github | `GH_TOKEN`, `GITHUB_TOKEN` |
+| google | `GEMINI_API_KEY`, `GOOGLE_API_KEY` |
+| aws | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` |
 
 For services not on this list, write values to `/etc/sandbox-persistent.sh` inside the sandbox — but those are visible to the agent. Use proxy injection whenever possible.
 
