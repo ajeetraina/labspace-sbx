@@ -40,21 +40,45 @@ newgrp kvm
 
 ---
 
-## Step 2 — Verify you're logged in
-
-```bash
-sbx ls
-```
-
-If you see a login prompt or an authentication error, run:
+## Step 2 — Log in to Docker
 
 ```bash
 sbx login
 ```
 
-This opens a browser for Docker OAuth. Complete the flow and return here.
+The CLI prints a one-time device confirmation code and a URL:
 
----
+```
+Your one-time device confirmation code: XXXX-XXXX
+Open this URL to sign in: https://login.docker.com/activate?user_code=XXXX-XXXX
+
+By logging in, you agree to our Subscription Service Agreement.
+
+Waiting for authentication...
+Signed in as <your-docker-username>.
+Daemon started (PID: XXXXX, socket: ~/Library/Application Support/com.docker.sandboxes/sandboxd/sandboxd.sock)
+Logs: ~/Library/Application Support/com.docker.sandboxes/sandboxd/daemon.log
+```
+
+Open the URL in your browser — the CLI confirms sign-in automatically.
+
+### Choose a network policy
+
+```
+Select a default network policy for your sandboxes:
+
+     1. Open         — All network traffic allowed, no restrictions.
+     2. Balanced     — Default deny, with common dev sites allowed.
+     3. Locked Down  — All network traffic blocked unless you allow it.
+
+  Use ↑/↓ or 1–3 to navigate, Enter to confirm, Esc to cancel.
+```
+
+Select **2. Balanced** for this lab.
+
+> **Note:** This policy is set once at login and applies to all sandboxes on this machine.
+
+## Step 3 — Verify you're logged in
 
 ## Step 3 — Authenticate Claude
 
