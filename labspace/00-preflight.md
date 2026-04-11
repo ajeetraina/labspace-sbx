@@ -92,7 +92,6 @@ Network policy set to "Balanced". Default deny, with common dev sites allowed.
 
 > **Note:** This policy applies to all sandboxes on this machine. Change it anytime with `sbx policy reset`.
 
-> **Note for Docker employees:** Use your personal Docker account (not your `@docker.com` SSO account). Corporate SSO is not yet supported by sbx.
 
 ---
 
