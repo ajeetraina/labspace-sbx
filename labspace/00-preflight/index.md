@@ -20,7 +20,7 @@ Before starting the lab, confirm your environment is ready. Every exercise depen
 Open a terminal on your host machine and run:
 
 ```bash
-sbx --version
+sbx version
 ```
 
 Expected output: a version string like `sbx 0.21.0` or similar.
