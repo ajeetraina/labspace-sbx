@@ -1,0 +1,20 @@
+{
+  "name": "Docker Sandboxes Labspace",
+  "dockerComposeFile": ["../compose.yaml"],
+  "service": "labspace",
+  "workspaceFolder": "/workspace",
+  "forwardPorts": [3030],
+  "portsAttributes": {
+    "3030": {
+      "label": "Labspace UI",
+      "onAutoForward": "openBrowser"
+    }
+  },
+  "postStartCommand": "echo 'Labspace running at http://localhost:3030'",
+  "remoteEnv": {
+    "OPENAI_API_KEY": "${localEnv:OPENAI_API_KEY}"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  }
+}
