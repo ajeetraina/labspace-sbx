@@ -23,7 +23,7 @@ Open a terminal on your host machine and run:
 sbx version
 ```
 
-Expected output: a version string like `sbx 0.21.0` or similar.
+Expected output: a version string like `sbx 0.24.0` or similar.
 
 If you see `command not found`, install sbx first:
 
