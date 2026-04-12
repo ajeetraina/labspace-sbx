@@ -28,7 +28,7 @@ Codex never saw the key.
 
 In a host terminal:
 
-```bash
+```bash no-run-button
 sbx secret ls
 ```
 
@@ -43,7 +43,7 @@ SCOPE      SERVICE   SECRET
 
 ## Set your OpenAI API key
 
-```bash
+```bash no-run-button
 export OPENAI_API_KEY=sk-...your-key-here...
 echo "$OPENAI_API_KEY" | sbx secret set -g openai
 ```
@@ -71,7 +71,7 @@ echo "$OPENAI_API_KEY" | sbx secret set -g openai
 
 Inside your Codex session:
 
-```bash
+```bash no-run-button
 echo $OPENAI_API_KEY
 printenv | grep -i openai
 printenv | grep -i api_key
@@ -85,7 +85,7 @@ printenv | grep -i api_key
 
 **AWS credentials:**
 
-```bash
+```bash no-run-button
 cat ~/.aws/credentials
 ls -la ~/.aws/
 ```
@@ -99,7 +99,7 @@ ls: cannot access '/home/agent/.aws/': No such file or directory
 
 **SSH private key:**
 
-```bash
+```bash no-run-button
 cat ~/.ssh/id_rsa
 ls -la ~/.ssh/
 ```
@@ -113,7 +113,7 @@ ls: cannot access '/home/agent/.ssh/': No such file or directory
 
 **Agent home directory:**
 
-```bash
+```bash no-run-button
 ls -la ~/
 pwd
 ```

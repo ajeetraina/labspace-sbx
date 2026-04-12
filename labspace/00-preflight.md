@@ -19,7 +19,7 @@ Before starting the lab, confirm your environment is ready. Every exercise depen
 
 Open a terminal on your host machine and run:
 
-```bash
+```bash no-run-button
 sbx version
 ```
 
@@ -27,7 +27,7 @@ Expected output: a version string like `sbx 0.21.0` or similar.
 
 If you see `command not found`, install sbx first:
 
-```bash
+```bash no-run-button
 # macOS
 brew install docker/tap/sbx
 
@@ -42,7 +42,7 @@ newgrp kvm
 
 ## Step 2 — Log in to Docker
 
-```bash
+```bash no-run-button
 sbx login
 ```
 
@@ -99,13 +99,13 @@ Network policy set to "Balanced". Default deny, with common dev sites allowed.
 
 Set your Anthropic API key as a global secret:
 
-```bash
+```bash no-run-button
 echo "$OPENAI_API_KEY" | sbx secret set -g openai
 ```
 
 Verify it was stored:
 
-```bash
+```bash no-run-button
 sbx secret ls
 ```
 
@@ -125,7 +125,7 @@ openai
 
 The exercises use DevBoard — a full-stack FastAPI + Next.js issue tracker with intentional bugs. It's pre-configured for this lab.
 
-```bash
+```bash no-run-button
 git clone https://github.com/dockersamples/sbx-quickstart ~/sbx-lab
 cd ~/sbx-lab
 ```
@@ -134,14 +134,14 @@ cd ~/sbx-lab
 
 ## Step 5 — Create your sandbox
 
-```bash
+```bash no-run-button
 cd ~/sbx-lab
 sbx create --name=sbxlab codex .
 ```
 
 > **First run:** The agent image will pull (1–2 minutes) and the sandbox will be created with the Balanced network policy you selected at login.
 
-```bash
+```bash no-run-button
 sbx ls
 ```
 
@@ -161,7 +161,7 @@ sbxlab    codex   running           /your/project/path
 
 ## Step 6 — Run your sandbox
 
-```bash
+```bash no-run-button
 sbx run sbxlab
 ```
 
@@ -180,7 +180,7 @@ changed 2 packages in 4s
 
 If you see this, simply re-run the command:
 
-```bash
+```bash no-run-button
 sbx run sbxlab
 ```
 

@@ -25,7 +25,7 @@ Press **Ctrl-C twice** to exit the Claude session and return to your host termin
 
 ## Start a branch mode session
 
-```bash
+```bash no-run-button
 sbx run sbxlab --branch=fix-bugs
 ```
 
@@ -52,7 +52,7 @@ Claude will take 3–5 minutes to run tests, diagnose failures, fix the bug, and
 
 While Claude works, open a **second host terminal** and watch the worktree:
 
-```bash
+```bash no-run-button
 cd ~/sbx-lab
 
 # See the worktree
@@ -73,7 +73,7 @@ You can see exactly what Claude is doing without interrupting the session.
 
 When Claude is done, exit the session (Ctrl-C twice) and review:
 
-```bash
+```bash no-run-button
 # See the full diff
 git diff main..fix-bugs
 
@@ -89,7 +89,7 @@ The diff is clean. Claude worked on its branch. Your `main` is untouched.
 
 If you're happy with the changes:
 
-```bash
+```bash no-run-button
 git push origin fix-bugs
 
 gh pr create \
@@ -106,7 +106,7 @@ This is the same PR workflow your team already uses — just with Claude as the 
 
 You don't have to name the branch yourself:
 
-```bash
+```bash no-run-button
 sbx run sbxlab --branch auto
 ```
 
@@ -116,7 +116,7 @@ sbx generates a name. Useful when you just want isolation without thinking about
 
 ## The worktree directory
 
-```bash
+```bash no-run-button
 ls .sbx/
 # sbxlab-worktrees/
 #   fix-bugs/    ← Claude worked here
@@ -124,7 +124,7 @@ ls .sbx/
 
 The worktree is a real Git worktree. It has the full repo history. It shares objects with your main clone (no duplication). When you delete the sandbox:
 
-```bash
+```bash no-run-button
 sbx rm sbxlab
 ```
 

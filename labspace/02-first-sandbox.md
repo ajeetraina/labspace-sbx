@@ -8,7 +8,7 @@ Time to get hands-on. In this module you'll start your sandbox, explore the arch
 
 From your host terminal, in `~/sbx-lab`:
 
-```bash
+```bash no-run-button
 sbx run sbxlab
 ```
 
@@ -59,7 +59,7 @@ Codex will read the source files and report back. Watch it work — it's reading
 
 While Codex is working, open a **second terminal on your host** and run:
 
-```bash
+```bash no-run-button
 # These show the sandbox is a VM, not a container
 docker ps          # sbxlab does NOT appear here
 sbx ls             # sbxlab appears HERE instead
@@ -101,7 +101,7 @@ Open one of the source files in your editor on the host. Make a small change and
 
 In a separate host terminal, run:
 
-```bash
+```bash no-run-button
 sbx
 ```
 

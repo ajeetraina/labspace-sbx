@@ -21,7 +21,7 @@ Run these commands **inside the sandbox** (Terminal A):
 
 ### 1a. Try to access AWS credentials
 
-```bash
+```bash no-run-button
 cat ~/.aws/credentials
 ls -la ~/.aws/
 ```
@@ -36,7 +36,7 @@ ls: cannot access '/home/agent/.aws/': No such file or directory
 
 ### 1b. Try to access SSH keys
 
-```bash
+```bash no-run-button
 cat ~/.ssh/id_rsa
 ls -la ~/.ssh/
 ```
@@ -51,7 +51,7 @@ ls: cannot access '/home/agent/.ssh/': No such file or directory
 
 ### 1c. Inspect the agent home directory
 
-```bash
+```bash no-run-button
 ls -la ~/
 pwd
 ```
@@ -79,7 +79,7 @@ Three things to notice:
 
 ### 1d. Inspect the scaffolding boundary
 
-```bash
+```bash no-run-button
 ls /Users/
 ls /Users/ajeetraina/
 ls /home/
@@ -111,7 +111,7 @@ containerd  docker  docker.pid  docker.sock  secrets
 
 ### 1e. Try to reach the AWS metadata endpoint
 
-```bash
+```bash no-run-button
 curl -s --connect-timeout 3 http://169.254.169.254/latest/meta-data/
 ```
 
@@ -126,7 +126,7 @@ The Balanced network policy blocks the AWS IMDS endpoint entirely — the most d
 
 ### 1f. Check the VM identity
 
-```bash
+```bash no-run-button
 uname -r
 cat /etc/os-release
 cat /proc/1/cgroup
@@ -154,7 +154,7 @@ VERSION_ID="25.10"
 
 Switch to **Terminal B** (host):
 
-```bash
+```bash no-run-button
 cat ~/.aws/credentials    # still here
 cat ~/.ssh/id_rsa         # still here
 ls -la ~/                 # unchanged

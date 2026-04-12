@@ -24,14 +24,14 @@ Open **two host terminal windows**. Run each command in its own window at the sa
 
 **Terminal 1 — Search feature:**
 
-```bash
+```bash no-run-button
 cd ~/sbx-lab
 sbx run sbxlab --branch=add-search -- "$(cat prompts/implement-search.txt)"
 ```
 
 **Terminal 2 — Notifications feature:**
 
-```bash
+```bash no-run-button
 cd ~/sbx-lab
 sbx run sbxlab --branch=add-notif -- "$(cat prompts/implement-notifications.txt)"
 ```
@@ -46,7 +46,7 @@ Both run against the same `sbxlab` sandbox — no new sandbox is created. You st
 
 In a **third terminal**, watch the worktrees update in real time:
 
-```bash
+```bash no-run-button
 cd ~/sbx-lab
 
 # Watch commits appear on each branch
@@ -61,7 +61,7 @@ Two agents. Two branches. Completely independent progress.
 
 In a **fourth terminal**:
 
-```bash
+```bash no-run-button
 sbx policy log sbxlab
 ```
 
@@ -73,7 +73,7 @@ You'll see both agents making API calls — all routed through the same proxy, a
 
 When both agents have finished (you'll see them exit or hit prompts):
 
-```bash
+```bash no-run-button
 # Review search implementation
 git diff main..add-search
 git diff main..add-search --stat
@@ -85,7 +85,7 @@ git diff main..add-notif --stat
 
 Push and create PRs:
 
-```bash
+```bash no-run-button
 git push origin add-search
 gh pr create --head add-search \
   --title "Implement issue search" \
@@ -118,7 +118,7 @@ That's the enterprise story. That's what the network policy and sandbox architec
 
 After reviewing and merging:
 
-```bash
+```bash no-run-button
 git worktree remove .sbx/sbxlab-worktrees/add-search
 git worktree remove .sbx/sbxlab-worktrees/add-notif
 git branch -d add-search add-notif

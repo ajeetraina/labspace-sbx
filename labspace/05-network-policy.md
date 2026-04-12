@@ -22,7 +22,7 @@ For this module, we'll work with **Balanced** — the default for most developer
 
 In a host terminal:
 
-```bash
+```bash no-run-button
 sbx policy ls
 ```
 
@@ -34,7 +34,7 @@ You'll see a long list of allowed domains — npm registries, PyPI, GitHub, AI p
 
 In a host terminal, run:
 
-```bash
+```bash no-run-button
 sbx policy log sbxlab
 ```
 
@@ -73,13 +73,13 @@ Key observations:
 
 In a host terminal:
 
-```bash
+```bash no-run-button
 sbx policy deny network pypi.org
 ```
 
 Now inside the sandbox, try to install something:
 
-```bash
+```bash no-run-button
 pip install httpx
 ```
 
@@ -95,7 +95,7 @@ The agent hit a wall. Not because of a system prompt instruction. Because the pr
 
 ## Re-allow the domain
 
-```bash
+```bash no-run-button
 sbx policy allow network pypi.org
 sbx policy allow network files.pythonhosted.org
 ```
@@ -108,20 +108,20 @@ Try the install again — it works.
 
 Reset your policy and choose Locked Down:
 
-```bash
+```bash no-run-button
 sbx policy reset
 # Choose: 3. Locked Down
 ```
 
 Now inside the sandbox, the agent can't reach its API:
 
-```bash
+```bash no-run-button
 # Ask Codex anything — it will fail to respond
 ```
 
 Add OpenAI back:
 
-```bash
+```bash no-run-button
 sbx policy allow network api.openai.com
 ```
 
@@ -140,7 +140,7 @@ The policy log isn't just a debugging tool. It's an audit trail:
 
 For regulated enterprises — banks, healthcare companies, government — this log answers the question: *"What did the agent do on the network?"*
 
-```bash
+```bash no-run-button
 # Filter log by sandbox
 sbx policy log sbxlab
 
@@ -152,7 +152,7 @@ sbx policy log
 
 ## Allow multiple domains at once
 
-```bash
+```bash no-run-button
 sbx policy allow network "*.npmjs.org,*.pypi.org,files.pythonhosted.org"
 ```
 
@@ -162,7 +162,7 @@ sbx policy allow network "*.npmjs.org,*.pypi.org,files.pythonhosted.org"
 
 Inside your Codex session:
 
-```bash
+```bash no-run-button
 curl -s --connect-timeout 3 http://169.254.169.254/latest/meta-data/
 ```
 
@@ -183,7 +183,7 @@ Docker Model Runner is Docker's native local model inference engine — built in
 
 ### Step 1 — Verify Model Runner is running on your host
 
-```bash
+```bash no-run-button
 docker model ls
 curl http://localhost:12434/engines/llama.cpp/v1/models
 ```
@@ -194,7 +194,7 @@ Docker Model Runner binds to loopback only. Use `localhost` directly from inside
 
 Inside your Codex session:
 
-```bash
+```bash no-run-button
 curl http://localhost:12434/engines/llama.cpp/v1/models
 ```
 
@@ -214,7 +214,7 @@ Real output:
 
 ### Step 3 — Make an inference call
 
-```bash
+```bash no-run-button
 curl http://localhost:12434/engines/llama.cpp/v1/chat/completions \
   -H "Content-Type: application/json" \
   -d '{"model": "docker.io/ai/smollm2:360M-Q4_K_M", "messages": [{"role": "user", "content": "Say hello in one sentence"}]}'

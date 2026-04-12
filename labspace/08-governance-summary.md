@@ -93,7 +93,7 @@ Answer these questions before finishing the lab:
 
 ## CLI Reference
 
-```bash
+```bash no-run-button
 # Lifecycle
 sbx create --name=X claude .       # create sandbox
 sbx run X                          # attach to sandbox
