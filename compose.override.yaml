@@ -3,10 +3,9 @@ services:
     environment:
       PROJECT_CLONE_URL: https://github.com/ajeetraina/labspace-sbx
 
-  # Uses the ttyd workspace image for its cmd-server (handles Run button)
-  # Port 8085 is intentionally NOT published here — Mac ttyd owns that port
   workspace:
-    image: dockersamples/labspace-workspace-ttyd:latest
+    image: ajeetraina/labspace-workspace-ttyd:latest
+    pull_policy: never
     ports: !override []
     environment:
       PORT: "8086"
