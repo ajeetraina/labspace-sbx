@@ -3,7 +3,13 @@ services:
     environment:
       PROJECT_CLONE_URL: https://github.com/ajeetraina/labspace-sbx
 
-  # workspace:
-  #   # Uncomment to expose sbx ports if needed
-  #   ports: !override
-  #     - "8080:8080"
+  # Dummy workspace - satisfies depends_on in the interface
+  # The real terminal is ttyd running on the Mac host (see start.sh)
+  workspace:
+    image: ubuntu:24.04
+    command: ["sleep", "infinity"]
+    ports: !override []
+
+  interface:
+    environment:
+      WORKSPACE_TYPE: ttyd
