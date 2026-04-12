@@ -3,6 +3,7 @@ services:
     environment:
       PROJECT_CLONE_URL: https://github.com/ajeetraina/labspace-sbx
 
+  # Workspace runs in relay-only mode (no ttyd) - Mac terminal owns port 8085
   workspace:
     image: ajeetraina/labspace-workspace-ttyd:latest
     pull_policy: never
@@ -10,6 +11,9 @@ services:
     environment:
       PORT: "8086"
 
+  # Custom interface image with IDE tab removed
   interface:
+    image: ajeetraina/labspace-interface-sbx:latest
+    pull_policy: never
     environment:
       WORKSPACE_TYPE: ttyd
