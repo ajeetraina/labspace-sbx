@@ -23,7 +23,7 @@ Open a terminal on your host machine and run:
 sbx version
 ```
 
-Expected output: a version string like `sbx 0.21.0` or similar.
+Expected output: a version string like `sbx 0.24.0` or similar.
 
 If you see `command not found`, install sbx first:
 
@@ -40,82 +40,33 @@ newgrp kvm
 
 ---
 
-## Step 2 — Log in to Docker
+## Step 2 — Verify you're logged in
+
+```bash no-run-button
+sbx ls
+```
+
+If you see a login prompt or an authentication error, run:
 
 ```bash no-run-button
 sbx login
 ```
 
-The CLI prints a one-time device confirmation code and a URL:
-
-```
-Your one-time device confirmation code: XXXX-XXXX
-Open this URL to sign in: https://login.docker.com/activate?user_code=XXXX-XXXX
-
-By logging in, you agree to our Subscription Service Agreement.
-For more details, see https://www.docker.com/legal/docker-subscription-service-agreement/
-
-Waiting for authentication...
-Signed in as <your-docker-username>.
-Daemon started (PID: XXXXX, socket: ~/Library/Application Support/com.docker.sandboxes/sandboxd/sandboxd.sock)
-Logs: ~/Library/Application Support/com.docker.sandboxes/sandboxd/daemon.log
-```
-
-Open the URL in your browser — the CLI confirms sign-in automatically.
-
-### Choose a network policy
-
-```
-Select a default network policy for your sandboxes:
-
-     1. Open         — All network traffic allowed, no restrictions.
-  ❯  2. Balanced     — Default deny, with common dev sites allowed.
-     3. Locked Down  — All network traffic blocked unless you allow it.
-
-  Use ↑/↓ or 1–3 to navigate, Enter to confirm, Esc to cancel.
-
-Network policy set to "Balanced". Default deny, with common dev sites allowed.
-
-  To change this anytime, run:
-    sbx policy reset
-
-  To configure additional policies, run:
-    sbx policy allow network <host>
-    sbx policy deny network <host>
-```
-
-| Policy | When to use |
-|--------|-------------|
-| Open | Local dev, no external exposure concerns |
-| **Balanced** | **Recommended — least privilege without breaking typical dev workflows** |
-| Locked Down | High-security or air-gapped environments |
-
-> **Note:** This policy applies to all sandboxes on this machine. Change it anytime with `sbx policy reset`.
-
+This opens a browser for Docker OAuth. Complete the flow and return here.
 
 ---
 
-## Step 3 — Authenticate your agent
-
-Set your Anthropic API key as a global secret:
-
-```bash no-run-button
-echo "$OPENAI_API_KEY" | sbx secret set -g openai
-```
-
-Verify it was stored:
+## Step 3 — Verify your Anthropic secret is stored
 
 ```bash no-run-button
 sbx secret ls
 ```
 
-Expected output:
+You should see an entry for `anthropic` in the output. If not:
 
+```bash no-run-button
+echo "$ANTHROPIC_API_KEY" | sbx secret set -g anthropic
 ```
-openai
-```
-
-> **Note:** If you see `No secrets found`, the key was not set. Re-run the `sbx secret set` command above.
 
 > **Why this matters:** Secrets are stored in your OS keychain and injected at the network proxy layer. The agent never sees the raw API key. This is one of the core governance guarantees you'll explore in Module 4.
 
@@ -135,76 +86,11 @@ cd ~/sbx-lab
 ## Step 5 — Create your sandbox
 
 ```bash no-run-button
-cd ~/sbx-lab
-sbx create --name=sbxlab codex .
-```
-
-> **First run:** The agent image will pull (1–2 minutes) and the sandbox will be created with the Balanced network policy you selected at login.
-
-```bash no-run-button
+sbx create --name=sbxlab claude .
 sbx ls
 ```
 
-You should see `sbxlab` in the list with status `stopped`:
-
-```
-SANDBOX   AGENT   STATUS    PORTS   WORKSPACE
-sbxlab    codex   stopped           /your/project/path
-```
-
-Once you run it (Step 6), the status changes to `running`:
-
-```
-SANDBOX   AGENT   STATUS    PORTS   WORKSPACE
-sbxlab    codex   running           /your/project/path
-```
-
-## Step 6 — Run your sandbox
-
-```bash no-run-button
-sbx run sbxlab
-```
-
-On first run, codex may auto-update itself:
-
-```
-Starting codex agent in sandbox 'sbxlab'...
-Workspace: /your/project/path
-
-Updating Codex via `npm install -g @openai/codex`...
-
-changed 2 packages in 4s
-
-🎉 Update ran successfully! Please restart Codex.
-```
-
-If you see this, simply re-run the command:
-
-```bash no-run-button
-sbx run sbxlab
-```
-
-You will then see a trust prompt before the agent starts:
-
-```
-INFO: Starting Docker daemon
-Starting codex agent in sandbox 'sbxlab'...
-Workspace: /your/project/path
-
-> You are in /your/project/path
-
-  Do you trust the contents of this directory? Working with untrusted
-  contents comes with higher risk of prompt injection.
-
-› 1. Yes, continue
-  2. No, quit
-
-  Press enter to continue
-```
-
-Select **1. Yes, continue** to launch the agent.
-
-> **Why this prompt exists:** sbx mounts only your project directory into the microVM. The trust check ensures you're aware of what the agent can see and act on.
+You should see `sbxlab` in the list with status `stopped`. The sandbox is ready — you'll start it in the next module.
 
 ---
 

@@ -9,22 +9,20 @@ set -e
 
 TTYD_PORT=8085
 
-# Check prerequisites
 if ! command -v ttyd &>/dev/null; then
   echo "ERROR: ttyd not found. Install with: brew install ttyd"
   exit 1
 fi
+
 if ! command -v sbx &>/dev/null; then
   echo "ERROR: sbx not found. Install with: brew install docker/tap/sbx"
   exit 1
 fi
 
-# Kill anything on port 8085
 echo "==> Clearing port $TTYD_PORT..."
 lsof -ti tcp:$TTYD_PORT | xargs kill -9 2>/dev/null || true
 sleep 1
 
-# Start Mac terminal in browser
 echo "==> Starting terminal on port $TTYD_PORT..."
 ttyd -p $TTYD_PORT --writable zsh &
 TTYD_PID=$!
@@ -36,7 +34,6 @@ if ! lsof -ti tcp:$TTYD_PORT &>/dev/null; then
 fi
 echo "    ttyd PID: $TTYD_PID"
 
-# Start Labspace
 echo "==> Starting Labspace..."
 docker compose \
   -f oci://dockersamples/labspace \
