@@ -1,33 +1,37 @@
 #!/bin/bash
 # start.sh - Launch the sbx Labspace with Mac terminal in browser
-#
-# Prerequisites:
-#   brew install ttyd
-#   brew install docker/tap/sbx
 
 set -e
 
 TTYD_PORT=8085
 
-# Check ttyd is installed
+# Check prerequisites
 if ! command -v ttyd &>/dev/null; then
   echo "ERROR: ttyd not found. Install with: brew install ttyd"
   exit 1
 fi
 
-# Check sbx is installed
 if ! command -v sbx &>/dev/null; then
   echo "ERROR: sbx not found. Install with: brew install docker/tap/sbx"
   exit 1
 fi
 
+# Kill anything already on port 8085
+echo "==> Checking port $TTYD_PORT..."
+lsof -ti tcp:$TTYD_PORT | xargs kill -9 2>/dev/null && echo "    Cleared stale process on port $TTYD_PORT" || true
+sleep 1
+
 echo "==> Starting ttyd (Mac terminal in browser) on port $TTYD_PORT..."
 ttyd -p $TTYD_PORT --writable zsh &
 TTYD_PID=$!
-echo "    ttyd PID: $TTYD_PID"
-
-# Give ttyd a moment to bind the port
 sleep 1
+
+# Verify ttyd actually started
+if ! lsof -ti tcp:$TTYD_PORT &>/dev/null; then
+  echo "ERROR: ttyd failed to start on port $TTYD_PORT"
+  exit 1
+fi
+echo "    ttyd running (PID: $TTYD_PID)"
 
 echo "==> Starting Labspace..."
 CONTENT_PATH=$PWD docker compose up &
@@ -42,6 +46,5 @@ echo ""
 echo "   Press Ctrl+C to stop everything"
 echo ""
 
-# Wait and clean up on exit
-trap "echo 'Stopping...'; kill $TTYD_PID $COMPOSE_PID 2>/dev/null; docker compose down" EXIT
+trap "echo 'Stopping...'; kill $TTYD_PID 2>/dev/null; CONTENT_PATH=$PWD docker compose down" EXIT
 wait $COMPOSE_PID
