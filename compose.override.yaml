@@ -3,12 +3,13 @@ services:
     environment:
       PROJECT_CLONE_URL: https://github.com/ajeetraina/labspace-sbx
 
-  # Dummy workspace - satisfies depends_on in the interface
-  # The real terminal is ttyd running on the Mac host (see start.sh)
+  # Uses the ttyd workspace image for its cmd-server (handles Run button)
+  # Port 8085 is intentionally NOT published here — Mac ttyd owns that port
   workspace:
-    image: ubuntu:24.04
-    command: ["sleep", "infinity"]
+    image: dockersamples/labspace-workspace-ttyd:latest
     ports: !override []
+    environment:
+      PORT: "8086"
 
   interface:
     environment:

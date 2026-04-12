@@ -10,6 +10,12 @@ description: |
   enforcement, branch mode, and parallel agent execution. Prove the security
   guarantees yourself with real commands against real file paths.
 
+services:
+  - title: Terminal
+    id: terminal
+    url: http://localhost:8085
+    icon: terminal
+
 sections:
   - title: Pre-flight Checklist
     contentPath: 00-preflight.md
