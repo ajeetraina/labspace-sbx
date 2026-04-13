@@ -16,7 +16,7 @@ An interactive lab for learning Docker Sandboxes — the microVM-based agent env
 ```bash
 git clone https://github.com/ajeetraina/labspace-sbx
 cd labspace-sbx
-bash start.sh
+bash start-labspace.sh
 ```
 
 Open http://localhost:3030
