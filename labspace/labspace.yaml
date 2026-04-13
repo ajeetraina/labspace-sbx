@@ -29,6 +29,8 @@ sections:
     contentPath: 02-first-sandbox.md
   - title: "The Isolation Proof \U0001F525"
     contentPath: 03-isolation-proof.md
+  - title: "Reviewing Agent Changes"
+    contentPath: 03b-reviewing-agent-changes.md
   - title: Secrets Without Exposure
     contentPath: 04-secrets.md
   - title: Network Policy
