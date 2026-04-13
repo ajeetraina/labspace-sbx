@@ -1,9 +1,20 @@
 #!/bin/bash
 # start.sh - Launch the sbx Labspace
 #
-# Prerequisites (auto-checked below):
-#   brew install ttyd
-#   brew install docker/tap/sbx
+# Prerequisites (automatically checked on startup):
+#
+#   macOS:
+#     brew install ttyd
+#     brew install docker/tap/sbx
+#
+#   Linux:
+#     sudo apt install ttyd
+#     curl -fsSL https://get.docker.com | sudo REPO_ONLY=1 sh
+#     sudo apt-get install docker-sbx
+#     sudo usermod -aG kvm $USER && newgrp kvm
+#
+#   If any prerequisite is missing, this script will tell you
+#   exactly what to install and exit cleanly.
 
 set -e
 
@@ -44,11 +55,23 @@ if ! command -v sbx &>/dev/null; then
   exit 1
 fi
 
-# ── 3. Set CONTENT_PATH (fixes 'empty section between colons') ──
+# ── 3. Ensure sbx daemon is running ────────────────────────────
+SBX_SERVER=$(sbx version 2>/dev/null | grep "Server Version:" | awk '{print $3}')
+if [ -z "$SBX_SERVER" ] || [ "$SBX_SERVER" = "Unavailable" ]; then
+  info "sbx daemon not running — starting it..."
+  sbx start
+  sleep 2
+fi
+
+SBX_CLIENT=$(sbx version 2>/dev/null | grep "Client Version:" | awk '{print $3}')
+SBX_SERVER=$(sbx version 2>/dev/null | grep "Server Version:" | awk '{print $3}')
+info "sbx client: $SBX_CLIENT  |  server: $SBX_SERVER"
+
+# ── 4. Set CONTENT_PATH (fixes 'empty section between colons') ──
 export CONTENT_PATH="${CONTENT_PATH:-$(pwd)}"
 info "CONTENT_PATH set to: $CONTENT_PATH"
 
-# ── 4. Validate compose.override.yaml exists ───────────────────
+# ── 5. Validate compose.override.yaml exists ───────────────────
 if [ ! -f "$COMPOSE_FILE" ]; then
   error "$COMPOSE_FILE not found. Are you running from the repo root?"
 fi
