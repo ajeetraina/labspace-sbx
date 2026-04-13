@@ -5,14 +5,15 @@ services:
 
   # Dummy workspace - satisfies depends_on, Mac terminal owns port 8085
   workspace:
-    image: ajeetraina/labspace-workspace-ttyd:latest
-    pull_policy: never
+    image: ajeetraina777/labspace-workspace-ttyd:latest
+    pull_policy: always
+    command: ttyd --writable bash
     ports: !override []
     environment:
       PORT: "8086"
 
   interface:
-    image: ajeetraina/labspace-interface-sbx:latest
-    pull_policy: never
+    image: ajeetraina777/labspace-interface-sbx:latest
+    pull_policy: always
     environment:
       WORKSPACE_TYPE: ttyd
