@@ -2,6 +2,9 @@
 
 An interactive lab for learning Docker Sandboxes — the microVM-based agent environment built by Docker.
 
+<img width="1016" height="741" alt="image" src="https://github.com/user-attachments/assets/192ce091-b33d-41f7-b2cf-c40e6d410d54" />
+
+
 ## Prerequisites
 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
