@@ -1,5 +1,5 @@
 #!/bin/bash
-# Run from root of labspace-sbx clone
+# This script disables the run button as I was habitual of htting it multiple times
 
 if [ ! -d "labspace" ]; then
   echo "ERROR: Run from root of labspace-sbx"
