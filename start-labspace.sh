@@ -1,5 +1,5 @@
 #!/bin/bash
-# start.sh - Launch the sbx Labspace
+# start-labspace.sh - Launch the sbx Labspace
 #
 # Prerequisites (automatically checked on startup):
 #
