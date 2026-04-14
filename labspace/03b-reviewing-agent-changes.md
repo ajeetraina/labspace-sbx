@@ -50,20 +50,9 @@ Git hooks live inside `.git/hooks/` — they are **not tracked by Git** and
 do **not appear in `git diff` output**. An agent could modify a hook and you'd
 never see it in a normal diff.
 
-Always check hooks separately after an agent session:
-
-```bash no-run-button
-ls -la .git/hooks/
-```
-
-Look for anything unexpected — especially `pre-commit`, `post-commit`,
-`pre-push`. If any have been modified recently:
-
-```bash no-run-button
-cat .git/hooks/pre-commit
-```
-
-Read the contents before running any Git commands.
+Always check hooks separately after an agent session by running
+`ls -la .git/hooks/` and reading any recently modified files with
+`cat .git/hooks/pre-commit` before running any Git commands.
 
 ---
 
