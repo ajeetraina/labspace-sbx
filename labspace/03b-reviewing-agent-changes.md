@@ -24,7 +24,7 @@ The agent can create, modify, and delete any file in the workspace including:
 
 > **The risk:** An agent running malicious or buggy code could modify a Git
 > hook that then runs on your host every time you commit. The microVM protects
-> your host *while the agent is running* — but files written to your workspace
+> your host *while the agent is running* but files written to your workspace
 > persist after the session ends.
 
 ---
