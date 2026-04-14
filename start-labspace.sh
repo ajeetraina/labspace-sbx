@@ -1,5 +1,5 @@
 #!/bin/bash
-# start-labspace.sh - Launch the sbx Labspace
+# start.sh - Launch the sbx Labspace
 #
 # Prerequisites (automatically checked on startup):
 #
@@ -83,7 +83,7 @@ sleep 1
 
 # ── 6. Start ttyd ──────────────────────────────────────────────
 info "Starting terminal on port $TTYD_PORT..."
-ttyd -p $TTYD_PORT --writable zsh &
+ttyd -p $TTYD_PORT --writable --max-clients 1 zsh &
 TTYD_PID=$!
 sleep 1
 
