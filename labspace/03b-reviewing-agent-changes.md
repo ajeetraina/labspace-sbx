@@ -35,25 +35,12 @@ After every agent session, before you commit, build, or open the project:
 
 ### Direct mode (default)
 
-Changes are in your working tree:
-
-```bash no-run-button
-git diff
-```
-
-Check what files were modified:
-
-```bash no-run-button
-git status
-```
+Run `git diff` to see changes in your working tree, and `git status` to check
+what files were modified.
 
 ### Branch mode
 
-The agent's changes are on a separate branch:
-
-```bash no-run-button
-git diff main..my-feature
-```
+Run `git diff main..my-feature` to see the agent's changes on a separate branch.
 
 ---
 
