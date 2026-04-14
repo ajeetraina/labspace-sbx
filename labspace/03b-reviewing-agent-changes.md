@@ -99,7 +99,7 @@ Expected output:
 
 ```
 #!/usr/bin/env bash
-echo 'hello from the agent'
+echo "hello from the agent"
 ```
 
 Now trigger it:
@@ -166,12 +166,6 @@ Now review what changed before touching anything:
 cd ~/sbx-lab
 git diff main..agent-experiment
 ```
-Now review what changed before touching anything:
-
-```bash
-cd ~/sbx-lab
-git diff main..agent-experiment
-```
 
 Check git hooks separately — they won't appear in the diff:
 
@@ -193,6 +187,10 @@ git branch -D agent-experiment
 
 Pay special attention to the same file types — Git hooks, CI config, build
 files, IDE config. Even in branch mode, review before you merge.
+
+> **Branch mode is not a security boundary.** The agent still has full write
+> access to the worktree. It gives you a clean diff to review — not protection
+> from malicious writes.
 
 ---
 
