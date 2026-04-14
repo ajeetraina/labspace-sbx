@@ -58,9 +58,15 @@ Always check hooks separately after an agent session by running
 
 ## Prove it yourself
 
-Let's demonstrate this. Start your sandbox:
+Let's demonstrate this. First, make sure you are in your sbx workspace:
 
-```bash no-run-button
+```bash
+cd ~/sbx-lab
+```
+
+Start your sandbox:
+
+```bash
 sbx run sbxlab
 ```
 
@@ -70,41 +76,66 @@ Ask the agent to create a Git hook:
 Create a pre-commit hook that prints "hello from the agent" before every commit
 ```
 
-Exit the sandbox, then check:
+Exit the sandbox:
 
+```bash
+exit
+```
 
-```bash no-run-button
+The microVM is now gone. Check the hook on your host:
+
+```bash
 ls -la .git/hooks/
+```
+
+Look for `pre-commit` with a recent timestamp — created by the agent, now
+living on your Mac.
+
+```bash
 cat .git/hooks/pre-commit
 ```
 
-Now try a commit:
+Expected output:
 
-```bash no-run-button
+```
+#!/usr/bin/env bash
+echo 'hello from the agent'
+```
+
+Now trigger it:
+
+```bash
 git commit --allow-empty -m "test hook"
 ```
 
-You'll see "hello from the agent" printed on your Mac terminal — code written
-by the agent running on your host. The microVM is gone, but the file persists.
+Expected output:
 
-This is not a bug. This is the expected behavior. The lesson is:
+```
+hello from the agent
+[main 9c1f07e] test hook
+```
 
-> **sbx isolates the agent while it runs. It does not sanitize what the agent
-> writes to your workspace. Review before you execute.**
+That's agent-written code running on your Mac. The microVM is gone — but the
+file persists and executes with your full host privileges.
+
+> **This is not a bug. This is the expected behavior.**
+>
+> sbx isolates the agent while it runs. It does not sanitize what the agent
+> writes to your workspace. Review before you execute.
 
 ---
 
 ## Cleaning up
 
-To remove a hook the agent created:
+To remove the hook the agent created:
 
-```bash no-run-button
+```bash
 rm .git/hooks/pre-commit
 ```
 
 To reset all hooks to their default state:
 
-```bash no-run-button
+```bash
 find .git/hooks -type f ! -name "*.sample" -delete
 ```
 
@@ -116,13 +147,13 @@ When you're not sure what an agent will do, use branch mode. The agent still
 has full write access — but its changes land on a separate worktree and branch,
 not your main working tree.
 
-```bash no-run-button
+```bash
 sbx run sbxlab --branch=agent-experiment
 ```
 
 Review the diff before merging anything:
 
-```bash no-run-button
+```bash
 git diff main..agent-experiment
 ```
 
@@ -148,11 +179,12 @@ pull request from an external contributor. Review before you trust.
 
 Before moving on:
 
-- Run `git diff` after an agent session and review the changes
-- Check `.git/hooks/` separately — it won't appear in `git diff`
-- Understand that branch mode gives you a clean diff to review, but is not
-  a security boundary
-- Know how to remove or reset hooks the agent created
+- [ ] Run `cd ~/sbx-lab` before testing hooks — git hooks are per-repository
+- [ ] Run `git diff` after an agent session and review the changes
+- [ ] Check `.git/hooks/` separately — it won't appear in `git diff`
+- [ ] Understand that branch mode gives you a clean diff to review, but is not
+      a security boundary
+- [ ] Know how to remove or reset hooks the agent created
 
 Next: secrets without exposure — how sbx injects credentials without the agent
 ever seeing them.
