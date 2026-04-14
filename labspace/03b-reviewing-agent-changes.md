@@ -1,7 +1,7 @@
 # Reviewing Agent Changes
 
 The agent has full write access to your workspace directory. Files it creates
-or modifies appear on your host immediately. This is by design — it's what
+or modifies appear on your host immediately. This is by design, it's what
 makes the agent useful.
 
 But full write access includes files that **execute code automatically** when
