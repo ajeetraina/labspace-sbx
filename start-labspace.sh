@@ -83,7 +83,7 @@ sleep 1
 
 # ── 6. Start ttyd ──────────────────────────────────────────────
 info "Starting terminal on port $TTYD_PORT..."
-ttyd -p $TTYD_PORT --writable --max-clients 2 zsh &
+ttyd -p $TTYD_PORT --writable --max-clients 4 zsh &
 TTYD_PID=$!
 sleep 1
 
