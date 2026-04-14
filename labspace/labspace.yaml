@@ -12,7 +12,7 @@ description: |
 
 services:
   - title: Term 1
-    id: ide
+    id: term1
     url: http://localhost:8085
     icon: terminal
   - title: Term 2
