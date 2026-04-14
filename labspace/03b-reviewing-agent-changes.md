@@ -66,9 +66,12 @@ sbx run sbxlab
 
 Ask the agent to create a Git hook:
 
-> Create a pre-commit hook that prints "hello from the agent" before every commit
+```text
+Create a pre-commit hook that prints "hello from the agent" before every commit
+```
 
 Exit the sandbox, then check:
+
 
 ```bash no-run-button
 ls -la .git/hooks/
