@@ -151,10 +151,44 @@ not your main working tree.
 sbx run sbxlab --branch=agent-experiment
 ```
 
-Review the diff before merging anything:
+sbx creates a new worktree at `~/sbxlab-worktrees/agent-experiment` and opens
+the agent there. Your `~/sbx-lab` working tree is untouched while the agent runs.
+
+When the agent is done, exit the sandbox:
 
 ```bash
+exit
+```
+
+Now review what changed before touching anything:
+
+```bash
+cd ~/sbx-lab
 git diff main..agent-experiment
+```
+Now review what changed before touching anything:
+
+```bash
+cd ~/sbx-lab
+git diff main..agent-experiment
+```
+
+Check git hooks separately — they won't appear in the diff:
+
+```bash
+ls -la ~/sbxlab-worktrees/agent-experiment/.git/hooks/
+```
+
+If you're happy with the changes, merge:
+
+```bash
+git merge agent-experiment
+```
+
+If not, discard everything:
+
+```bash
+git branch -D agent-experiment
 ```
 
 Pay special attention to the same file types — Git hooks, CI config, build
