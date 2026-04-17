@@ -98,7 +98,7 @@ Network policy set to "Balanced". Default deny, with common dev sites allowed.
 
 ## Step 3 — Authenticate your agent
 
-Set your Anthropic API key as a global secret:
+Set your OpenAI API key as a global secret:
 
 ```bash no-run-button
 echo "$OPENAI_API_KEY" | sbx secret set -g openai
