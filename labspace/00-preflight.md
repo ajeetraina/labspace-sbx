@@ -1,4 +1,3 @@
-
 # Pre-flight Checklist
 
 Before starting the lab, confirm your environment is ready. Every exercise depends on `sbx` running correctly on your host machine. **Do not skip this section.**
@@ -76,13 +75,6 @@ Select a default network policy for your sandboxes:
   Use ↑/↓ or 1–3 to navigate, Enter to confirm, Esc to cancel.
 
 Network policy set to "Balanced". Default deny, with common dev sites allowed.
-
-  To change this anytime, run:
-    sbx policy reset
-
-  To configure additional policies, run:
-    sbx policy allow network <host>
-    sbx policy deny network <host>
 ```
 
 | Policy | When to use |
@@ -93,30 +85,69 @@ Network policy set to "Balanced". Default deny, with common dev sites allowed.
 
 > **Note:** This policy applies to all sandboxes on this machine. Change it anytime with `sbx policy reset`.
 
-
 ---
 
-## Step 3 — Authenticate your agent
+## Step 3 — Choose your agent and provider
 
-Set your OpenAI API key as a global secret:
+This lab works with any mainstream coding agent. Pick the provider whose API key you have — the rest of the lab will adapt.
+
+::variableSetButton[Use OpenAI + Codex]{variables="provider=openai,agent=codex,keyEnv=OPENAI_API_KEY,secretName=openai"}
+
+::variableSetButton[Use Anthropic + Claude]{variables="provider=anthropic,agent=claude,keyEnv=ANTHROPIC_API_KEY,secretName=anthropic"}
+
+::variableSetButton[Use Google + Gemini]{variables="provider=gemini,agent=gemini,keyEnv=GOOGLE_API_KEY,secretName=google"}
+
+&nbsp;
+
+:::conditionalDisplay{variable="provider" requiredValue="openai"}
+### OpenAI configuration
+
+You'll run **Codex** inside the sandbox, authenticated to OpenAI.
+
+::variableDefinition[openaikey]{prompt="Enter your OpenAI API key"}
+
+Store it as a global sbx secret — this goes into your OS keychain, never disk:
 
 ```bash no-run-button
-echo "$OPENAI_API_KEY" | sbx secret set -g openai
+echo "$$openaikey$$" | sbx secret set -g openai
 ```
+:::
 
-Verify it was stored:
+:::conditionalDisplay{variable="provider" requiredValue="anthropic"}
+### Anthropic configuration
+
+You'll run **Claude Code** inside the sandbox, authenticated to Anthropic.
+
+::variableDefinition[anthropickey]{prompt="Enter your Anthropic API key"}
+
+Store it as a global sbx secret — this goes into your OS keychain, never disk:
+
+```bash no-run-button
+echo "$$anthropickey$$" | sbx secret set -g anthropic
+```
+:::
+
+:::conditionalDisplay{variable="provider" requiredValue="gemini"}
+### Gemini configuration
+
+You'll run **Gemini CLI** inside the sandbox, authenticated to Google.
+
+::variableDefinition[geminikey]{prompt="Enter your Google/Gemini API key"}
+
+Store it as a global sbx secret — this goes into your OS keychain, never disk:
+
+```bash no-run-button
+echo "$$geminikey$$" | sbx secret set -g google
+```
+:::
+
+Verify the secret was stored:
 
 ```bash no-run-button
 sbx secret ls
 ```
 
-Expected output:
-
-```
-openai
-```
-
-> **Note:** If you see `No secrets found`, the key was not set. Re-run the `sbx secret set` command above.
+Expected output: a line matching your chosen provider (`openai`, `anthropic`, or `google`).
 
 > **Why this matters:** Secrets are stored in your OS keychain and injected at the network proxy layer. The agent never sees the raw API key. This is one of the core governance guarantees you'll explore in Module 4.
 
@@ -137,7 +168,7 @@ cd ~/sbx-lab
 
 ```bash no-run-button
 cd ~/sbx-lab
-sbx create --name=sbxlab codex .
+sbx create --name=sbxlab $$agent$$ .
 ```
 
 > **First run:** The agent image will pull (1–2 minutes) and the sandbox will be created with the Balanced network policy you selected at login.
@@ -149,16 +180,13 @@ sbx ls
 You should see `sbxlab` in the list with status `stopped`:
 
 ```
-SANDBOX   AGENT   STATUS    PORTS   WORKSPACE
-sbxlab    codex   stopped           /your/project/path
+SANDBOX   AGENT    STATUS    PORTS   WORKSPACE
+sbxlab    $$agent$$   stopped           /your/project/path
 ```
 
-Once you run it (Step 6), the status changes to `running`:
+Once you run it (Step 6), the status changes to `running`.
 
-```
-SANDBOX   AGENT   STATUS    PORTS   WORKSPACE
-sbxlab    codex   running           /your/project/path
-```
+---
 
 ## Step 6 — Run your sandbox
 
@@ -166,20 +194,7 @@ sbxlab    codex   running           /your/project/path
 sbx run sbxlab
 ```
 
-On first run, codex may auto-update itself:
-
-```
-Starting codex agent in sandbox 'sbxlab'...
-Workspace: /your/project/path
-
-Updating Codex via `npm install -g @openai/codex`...
-
-changed 2 packages in 4s
-
-🎉 Update ran successfully! Please restart Codex.
-```
-
-If you see this, simply re-run the command:
+On first run, the agent may auto-update itself. If you see an update message, simply re-run the command:
 
 ```bash no-run-button
 sbx run sbxlab
@@ -189,7 +204,7 @@ You will then see a trust prompt before the agent starts:
 
 ```
 INFO: Starting Docker daemon
-Starting codex agent in sandbox 'sbxlab'...
+Starting $$agent$$ agent in sandbox 'sbxlab'...
 Workspace: /your/project/path
 
 > You are in /your/project/path
@@ -199,8 +214,6 @@ Workspace: /your/project/path
 
 › 1. Yes, continue
   2. No, quit
-
-  Press enter to continue
 ```
 
 Select **1. Yes, continue** to launch the agent.
@@ -211,6 +224,6 @@ Select **1. Yes, continue** to launch the agent.
 
 ## ✅ Ready to go
 
-All five checks pass? Move to Module 1.
+All six steps pass? Move to Module 1.
 
 If anything failed, check [Troubleshooting](https://docs.docker.com/ai/sandboxes/troubleshooting/) or the Appendix at the end of this lab.
