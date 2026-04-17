@@ -104,12 +104,16 @@ This lab works with any mainstream coding agent. Pick the provider whose API key
 
 You'll run **Codex** inside the sandbox, authenticated to OpenAI.
 
-::variableDefinition[openaikey]{prompt="Enter your OpenAI API key"}
-
-Store it as a global sbx secret — this goes into your OS keychain, never disk:
+**First, export your API key in your host terminal** (don't paste it into this page):
 
 ```bash no-run-button
-echo "$$openaikey$$" | sbx secret set -g openai
+export OPENAI_API_KEY=sk-proj-...    # your real key, set in your own shell
+```
+
+Then store it as a global sbx secret. The command below reads `$OPENAI_API_KEY` from your shell — your key never leaves the terminal and is not displayed anywhere:
+
+```bash no-run-button
+echo "$OPENAI_API_KEY" | sbx secret set -g openai
 ```
 :::
 
@@ -118,12 +122,16 @@ echo "$$openaikey$$" | sbx secret set -g openai
 
 You'll run **Claude Code** inside the sandbox, authenticated to Anthropic.
 
-::variableDefinition[anthropickey]{prompt="Enter your Anthropic API key"}
-
-Store it as a global sbx secret — this goes into your OS keychain, never disk:
+**First, export your API key in your host terminal** (don't paste it into this page):
 
 ```bash no-run-button
-echo "$$anthropickey$$" | sbx secret set -g anthropic
+export ANTHROPIC_API_KEY=sk-ant-...    # your real key, set in your own shell
+```
+
+Then store it as a global sbx secret. The command below reads `$ANTHROPIC_API_KEY` from your shell — your key never leaves the terminal and is not displayed anywhere:
+
+```bash no-run-button
+echo "$ANTHROPIC_API_KEY" | sbx secret set -g anthropic
 ```
 :::
 
@@ -132,14 +140,20 @@ echo "$$anthropickey$$" | sbx secret set -g anthropic
 
 You'll run **Gemini CLI** inside the sandbox, authenticated to Google.
 
-::variableDefinition[geminikey]{prompt="Enter your Google/Gemini API key"}
-
-Store it as a global sbx secret — this goes into your OS keychain, never disk:
+**First, export your API key in your host terminal** (don't paste it into this page):
 
 ```bash no-run-button
-echo "$$geminikey$$" | sbx secret set -g google
+export GOOGLE_API_KEY=AIza...    # your real key, set in your own shell
+```
+
+Then store it as a global sbx secret. The command below reads `$GOOGLE_API_KEY` from your shell — your key never leaves the terminal and is not displayed anywhere:
+
+```bash no-run-button
+echo "$GOOGLE_API_KEY" | sbx secret set -g google
 ```
 :::
+
+> **Why not type the key into this page?** Labspace renders anything you enter into an input field inline in the command below it — so the raw key becomes visible in the lab UI and in screenshots. Setting the env var in your own shell keeps the key off the page entirely.
 
 Verify the secret was stored:
 
@@ -147,7 +161,7 @@ Verify the secret was stored:
 sbx secret ls
 ```
 
-Expected output: a line matching your chosen provider (`openai`, `anthropic`, or `google`).
+Expected output: a line matching your chosen provider (`openai`, `anthropic`, or `google`) with the value masked as `****...****`.
 
 > **Why this matters:** Secrets are stored in your OS keychain and injected at the network proxy layer. The agent never sees the raw API key. This is one of the core governance guarantees you'll explore in Module 4.
 
