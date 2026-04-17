@@ -40,6 +40,6 @@ sections:
   - title: Parallel Agents
     contentPath: 07-parallel-agents.md
   - title: Running Open-Source Models Inside sbx
-    contentPath: 09-local-models.md
+    contentPath: 08-local-models.md
   - title: AI Governance at Scale
-    contentPath: 08-governance-summary.md
+    contentPath: 09-governance-summary.md
