@@ -1,6 +1,6 @@
 # Labspace for Docker Sandboxes (sbx)
 
-An interactive lab for learning Docker Sandboxes — the microVM-based agent environment built by Docker.
+An interactive lab for learning Docker Sandboxes - the microVM-based agent environment built by Docker.
 
 <img width="1850" height="979" alt="image" src="https://github.com/user-attachments/assets/86bab658-04de-43d4-8f68-478a1a3f0da8" />
 
