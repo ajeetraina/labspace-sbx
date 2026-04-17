@@ -26,7 +26,12 @@ Open http://localhost:3030
 
 ## What you'll learn
 
-- What Docker Sandboxes (sbx) are and why they exist
-- How sbx uses microVMs for agent isolation
-- Running AI agents safely inside sbx sandboxes
-- Sandbox lifecycle: create, exec, list, stop
+- **Why microVM isolation matters** for AI agents and how sbx's boundary differs from a container
+- **The four layers of agent governance:** structural isolation, credential proxy injection, network policy enforcement, and audit logging
+- **Running your first sandbox** and proving an agent cannot escape the VM — with real commands against real file paths
+- **Reviewing agent changes** with Git worktrees before any code touches your working tree
+- **Injecting secrets** into agents without ever exposing them to the VM
+- **Enforcing network policy** at the proxy layer — and watching allowed and blocked connections in a live audit log
+- **Branch mode and parallel agents** — running multiple autonomous agents on the same repo simultaneously, each governed by the same policy
+- **Air-gapped agent workflows** — running open-source models locally with Docker Model Runner, zero cloud dependency
+- **The enterprise architecture:** what it takes to govern 30,000 concurrent agent sessions across a workforce
