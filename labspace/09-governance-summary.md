@@ -13,11 +13,12 @@ Here's what you demonstrated hands-on:
 | Governance Capability | How You Proved It |
 |---|---|
 | **Structural isolation** | Tried to access `~/.aws/credentials` and `~/.ssh/id_rsa` — not there |
-| **Credential proxy injection** | Asked Claude to print its API key — it couldn't |
+| **Credential proxy injection** | Asked the agent to print its API key — it couldn't |
 | **Network enforcement** | Blocked PyPI, saw the install fail in real time |
 | **Audit trail** | Watched `sbx policy log` show every connection |
 | **Safe review workflow** | Used branch mode to get a clean diff before merging |
 | **Scale** | Ran two agents in parallel, zero conflicts |
+| **Local inference** | Ran Docker Model Runner on the host, agent in the VM, zero cloud dependency |
 
 None of these relied on a policy document. None relied on a system prompt instruction. All of them are structural.
 
@@ -31,7 +32,7 @@ If you were presenting this to a risk team, here's how each requirement maps:
 MicroVM boundary. Agent runs inside its own kernel. Host credentials don't exist inside the VM. Verified by you in Module 3.
 
 **2. BYOLLM / LLM Gateway**
-Secrets are stored in the OS keychain, injected at the proxy layer. All LLM traffic routes through the host-side proxy. The gateway is the proxy. Verified in Module 4.
+Secrets are stored in the OS keychain, injected at the proxy layer. All LLM traffic routes through the host-side proxy. The gateway is the proxy. Verified in Module 4. For air-gapped deployments, local models via Docker Model Runner give you the same architecture with zero cloud dependency.
 
 **3. Telemetry and audit logging**
 `sbx policy log` shows every outbound connection — allowed or blocked — with timestamps and agent attribution. Verified in Module 5.
@@ -95,27 +96,29 @@ Answer these questions before finishing the lab:
 
 ```bash no-run-button
 # Lifecycle
-sbx create --name=X claude .       # create sandbox
-sbx run X                          # attach to sandbox
-sbx run X --branch=NAME            # branch mode
-sbx ls                             # list sandboxes
-sbx stop X / sbx rm X             # pause / delete
+sbx create --name=X $$agent$$ .        # create sandbox with your chosen agent
+sbx run X                              # attach to sandbox
+sbx run X --branch=NAME                # branch mode
+sbx ls                                 # list sandboxes
+sbx stop X / sbx rm X                  # pause / delete
 
 # Inspection
-sbx exec -it X bash                # shell inside sandbox
-sbx ports X --publish H:S          # port forwarding
+sbx exec -it X bash                    # shell inside sandbox
+sbx ports X --publish H:S              # port forwarding
 
 # Network policy
-sbx policy ls                      # show rules
-sbx policy log X                   # live connection log
-sbx policy allow network DOMAIN    # allow a domain
-sbx policy deny network DOMAIN     # block a domain
-sbx policy reset                   # choose new default policy
+sbx policy ls                          # show rules
+sbx policy log X                       # live connection log
+sbx policy allow network DOMAIN        # allow a domain
+sbx policy deny network DOMAIN         # block a domain
+sbx policy reset                       # choose new default policy
 
 # Secrets
-sbx secret set -g SERVICE          # store globally
-sbx secret ls                      # list secrets
+sbx secret set -g SERVICE              # store globally
+sbx secret ls                          # list secrets
 ```
+
+Valid agent values for `sbx create`: `codex`, `claude`, `gemini`, `copilot`, `kiro`, `opencode`, `docker-agent`, `shell`.
 
 ---
 
