@@ -43,10 +43,3 @@ sections:
     contentPath: 08-local-models.md
   - title: AI Governance at Scale
     contentPath: 09-governance-summary.md
-  - title: "The Blast Radius Test"
-    contentPath: 10-blast-radius-test.md
-    duration: 15
-    description: |
-      Run a destructive command inside sbx and watch your host stay
-      untouched. The clearest demonstration of why microVM isolation
-      matters for autonomous AI agents.
