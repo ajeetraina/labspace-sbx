@@ -1,0 +1,5 @@
+schemaVersion: "1"
+kind: mixin
+name: docker-review
+displayName: Dockerfile review skill
+description: Ships a Claude Code skill that reviews Dockerfiles for best practices

@@ -1,0 +1,29 @@
+schemaVersion: "1"
+kind: agent
+name: claude-safe
+displayName: Claude Code (with approval prompts)
+description: Claude Code without --dangerously-skip-permissions — every tool call requires explicit approval
+
+agent:
+  image: "docker/sandbox-templates:claude-code-docker"
+  aiFilename: CLAUDE.md
+  persistence: persistent
+  entrypoint:
+    run: [claude]
+
+network:
+  serviceDomains:
+    api.anthropic.com: anthropic
+    console.anthropic.com: anthropic
+  serviceAuth:
+    anthropic:
+      headerName: x-api-key
+      valueFormat: "%s"
+  allowedDomains:
+    - "claude.com:443"
+
+credentials:
+  sources:
+    anthropic:
+      env:
+        - ANTHROPIC_API_KEY

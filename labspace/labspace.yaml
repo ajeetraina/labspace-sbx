@@ -1,8 +1,3 @@
-metadata:
-  id: ajeetraina/labspace-sbx
-  sourceRepo: github.com/ajeetraina/labspace-sbx
-  contentVersion: abcd123
-
 title: Running AI Agents Safely with Docker Sandboxes
 description: |
   Learn how to run AI coding agents in isolated microVM sandboxes using Docker sbx.
@@ -27,7 +22,7 @@ sections:
     contentPath: 01-why-governance.md
   - title: Your First Sandbox
     contentPath: 02-first-sandbox.md
-  - title: "The Isolation Proof \U0001F525"
+  - title: "The Isolation Proof 🔥"
     contentPath: 03-isolation-proof.md
   - title: "Reviewing Agent Changes"
     contentPath: 03b-reviewing-agent-changes.md
@@ -50,3 +45,15 @@ sections:
       Run a destructive command inside sbx and watch your host stay
       untouched. The clearest demonstration of why microVM isolation
       matters for autonomous AI agents.
+  - title: "Docker Sandbox Kits"
+    contentPath: kits/01-intro.md
+  - title: "Your First Mixin Kit"
+    contentPath: kits/02-first-mixin.md
+  - title: "Network Control and Credentials"
+    contentPath: kits/03-network-and-creds.md
+  - title: "Fork an Agent Kit"
+    contentPath: kits/04-agent-kit.md
+  - title: "Stacking Kits and the Community Repo"
+    contentPath: kits/05-stacking-and-community.md
+  - title: "Kits: Summary and Next Steps"
+    contentPath: kits/06-summary.md
