@@ -56,16 +56,16 @@ if ! command -v sbx &>/dev/null; then
 fi
 
 # ── 3. Ensure sbx daemon is running ────────────────────────────
-SBX_SERVER=$(sbx version 2>/dev/null | grep "Server Version:" | awk '{print $3}')
-if [ -z "$SBX_SERVER" ] || [ "$SBX_SERVER" = "Unavailable" ]; then
+DAEMON_OUTPUT=$(sbx daemon start 2>&1)
+if echo "$DAEMON_OUTPUT" | grep -q "already running"; then
+  info "sbx daemon already running"
+else
   info "sbx daemon not running — starting it..."
-  sbx start
   sleep 2
 fi
 
-SBX_CLIENT=$(sbx version 2>/dev/null | grep "Client Version:" | awk '{print $3}')
-SBX_SERVER=$(sbx version 2>/dev/null | grep "Server Version:" | awk '{print $3}')
-info "sbx client: $SBX_CLIENT  |  server: $SBX_SERVER"
+SBX_VERSION=$(sbx version 2>/dev/null)
+info "sbx version: $SBX_VERSION"
 
 # ── 4. Set CONTENT_PATH (fixes 'empty section between colons') ──
 export CONTENT_PATH="${CONTENT_PATH:-$(pwd)}"
@@ -76,12 +76,12 @@ if [ ! -f "$COMPOSE_FILE" ]; then
   error "$COMPOSE_FILE not found. Are you running from the repo root?"
 fi
 
-# ── 5. Clear port ──────────────────────────────────────────────
+# ── 6. Clear port ──────────────────────────────────────────────
 info "Clearing port $TTYD_PORT..."
 lsof -ti tcp:$TTYD_PORT | xargs kill -9 2>/dev/null || true
 sleep 1
 
-# ── 6. Start ttyd ──────────────────────────────────────────────
+# ── 7. Start ttyd ──────────────────────────────────────────────
 info "Starting terminal on port $TTYD_PORT..."
 ttyd -p $TTYD_PORT --writable --max-clients 4 zsh &
 TTYD_PID=$!
@@ -92,7 +92,7 @@ if ! lsof -ti tcp:$TTYD_PORT &>/dev/null; then
 fi
 info "ttyd PID: $TTYD_PID"
 
-# ── 7. Start Labspace (use local compose file if present, ───────
+# ── 8. Start Labspace (use local compose file if present, ───────
 #       otherwise fall back to OCI reference)  ──────────────────
 if [ -f "docker-compose.yml" ]; then
   BASE_COMPOSE="docker-compose.yml"
@@ -128,7 +128,7 @@ echo "==========================================="
 echo ""
 echo "Press Ctrl+C to stop"
 
-# ── 8. Cleanup on exit ─────────────────────────────────────────
+# ── 9. Cleanup on exit ─────────────────────────────────────────
 cleanup() {
   echo ""
   info "Stopping..."
